@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Einstein And Entanglement"
-author: Syed Nooruklla
+author: Syed Noorulla
 image: assets/images/11.jpg
 featured: true
 description: "To Einstein, randomness was a flaw in nature’s logic, not a feature."
