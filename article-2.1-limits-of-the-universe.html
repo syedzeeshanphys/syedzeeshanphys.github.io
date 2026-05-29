@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Limits Of The Universe — Syed Noorulla</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #07070f;
+      --text: #eeeae2;
+      --muted: #9b97a0;
+      --accent: #d4845a;
+      --border: rgba(255,255,255,0.08);
+      --card-bg: rgba(255,255,255,0.04);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.75;
+      font-size: 17px;
+      overflow-x: hidden;
+    }
+
+    /* nebula glow */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 15% 30%, rgba(90,40,140,0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 80% 70%, rgba(30,80,160,0.14) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 55% at 60% 10%, rgba(180,60,80,0.10) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    #universe {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7,7,15,0.75);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 5vw;
+      position: relative;
+      z-index: 10;
+    }
+    .nav-name {
+      font-family: 'Lora', serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .nav-back {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .nav-back:hover { color: var(--accent); }
+
+    /* ── HERO IMAGE ── */
+    .article-hero {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-height: 520px;
+      overflow: hidden;
+    }
+    .article-hero img {
+      width: 100%;
+      height: 520px;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.75);
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        transparent 30%,
+        rgba(7,7,15,0.6) 70%,
+        var(--bg) 100%
+      );
+    }
+
+    /* ── ARTICLE WRAPPER ── */
+    .article-wrapper {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 5vw 6rem;
+    }
+
+    /* ── ARTICLE HEADER ── */
+    .article-header {
+      margin-top: -80px;
+      margin-bottom: 3rem;
+    }
+    .article-topic {
+      display: inline-block;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+    .article-title {
+      font-family: 'Lora', serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.15;
+      color: #f5f0e8;
+      margin-bottom: 1.2rem;
+    }
+    .article-subtitle {
+      font-size: 1.15rem;
+      color: var(--muted);
+      line-height: 1.75;
+      font-style: italic;
+      font-family: 'Lora', serif;
+      margin-bottom: 2rem;
+      max-width: 600px;
+    }
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+      padding: 1.4rem 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .meta-author {
+      font-weight: 500;
+      color: #d8d3cc;
+    }
+    .meta-dot { opacity: 0.4; }
+
+    /* ── ARTICLE BODY ── */
+    .article-body {
+      margin-top: 2.8rem;
+    }
+    .article-body p {
+      font-size: 1.08rem;
+      line-height: 1.9;
+      color: #cec9c1;
+      margin-bottom: 1.8rem;
+    }
+    .article-body h2 {
+      font-family: 'Lora', serif;
+      font-size: 1.65rem;
+      font-weight: 600;
+      color: #f5f0e8;
+      margin: 3rem 0 1.2rem;
+      line-height: 1.3;
+    }
+    .article-body h3 {
+      font-family: 'Lora', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #e8e3da;
+      margin: 2.2rem 0 0.9rem;
+      font-style: italic;
+    }
+    .article-body blockquote {
+      border-left: 3px solid var(--accent);
+      margin: 2.5rem 0;
+      padding: 0.5rem 0 0.5rem 2rem;
+      font-family: 'Lora', serif;
+      font-size: 1.18rem;
+      font-style: italic;
+      color: #d8d3cc;
+      line-height: 1.8;
+    }
+    .article-body strong {
+      color: #e8e3da;
+      font-weight: 500;
+    }
+    .article-body em {
+      color: #d8d3cc;
+      font-style: italic;
+    }
+
+    /* inline figure */
+    .article-figure {
+      margin: 3rem 0;
+    }
+    .article-figure img {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      filter: brightness(0.85);
+    }
+    .article-figure figcaption {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 0.75rem;
+      text-align: center;
+      font-style: italic;
+    }
+
+    /* ── DIVIDER ── */
+    .section-break {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 3rem 0;
+      opacity: 0.35;
+    }
+    .section-break span { 
+      font-size: 1.2rem; 
+      color: var(--accent);
+    }
+    .section-break::before, .section-break::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── FOOTER ── */
+    .article-footer {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 3rem 5vw;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: opacity 0.2s;
+      margin-bottom: 1.5rem;
+    }
+    .back-link:hover { opacity: 0.7; }
+
+    /* animation */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .article-header { animation: fadeUp 0.7s ease both; }
+    .article-body   { animation: fadeUp 0.7s 0.15s ease both; }
+  </style>
+</head>
+<body>
+
+  <canvas id="universe"></canvas>
+
+  <nav style="position:sticky; top:0; z-index:100; background:rgba(7,7,15,0.75); backdrop-filter:blur(14px); border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; padding:1.1rem 5vw;">
+    <a class="nav-name" href="index.html">Syed Noorulla</a>
+    <a class="nav-back" href="index.html#blogs">← All Writing</a>
+  </nav>
+
+  <!-- HERO IMAGE -->
+  <div class="article-hero">
+    <img src="assets/images/limits-of-the-universe.jpg" alt="Limits Of The Universe">
+    <div class="hero-overlay"></div>
+  </div>
+
+  <div class="article-wrapper">
+
+    <div class="article-header">
+      <span class="article-topic">Cosmology · Special Relativity</span>
+      <h1 class="article-title">Einstein And Entanglement</h1>
+      <p class="article-subtitle">He called it "spooky action at a distance" and spent decades trying to disprove it. The debate that changed quantum mechanics forever.</p>
+      <div class="article-meta">
+        <span class="meta-author">Syed Noorulla</span>
+        <span class="meta-dot">·</span>
+        <span>8 min read</span>
+        <span class="meta-dot">·</span>
+        <span>Quantum Mechanics</span>
+      </div>
+    </div>
+
+    <div class="article-body">
+
+      <p>In 1935, Albert Einstein sat down with two colleagues — Boris Podolsky and Nathan Rosen — and wrote one of the most provocative papers in the history of physics. Their target was quantum mechanics itself, the theory that had reshaped humanity's understanding of matter and energy. Their argument was elegant and devastating: quantum mechanics, they claimed, was <strong>incomplete</strong>.</p>
+
+      <p>At the heart of their challenge was a phenomenon we now call <em>quantum entanglement</em> — and Einstein found it deeply, philosophically troubling. He had a word for it: <em>spukhafte Fernwirkung</em>. Spooky action at a distance.</p>
+
+      <h2>The EPR Paradox</h2>
+
+      <p>The 1935 paper, known by its authors' initials as EPR, constructed a thought experiment of remarkable precision. Imagine two particles that interact briefly, then separate across vast distances. According to quantum mechanics, measuring one particle instantly determines something about the other — no matter how far apart they are. Not eventually. <strong>Instantly.</strong></p>
+
+      <blockquote>
+        "If, without in any way disturbing a system, we can predict with certainty the value of a physical quantity, then there exists an element of physical reality corresponding to that quantity."
+      </blockquote>
+
+      <p>Einstein's realism demanded a local explanation. Information, he believed, could not travel faster than light — that was a cornerstone of his own special relativity. If quantum mechanics allowed instantaneous correlations across space, then either the theory was telling an incomplete story, or the universe was playing tricks that violated the very fabric of causality.</p>
+
+      <p>He was convinced it was the former. There must be <em>hidden variables</em> — deeper layers of reality that quantum mechanics had not yet uncovered — that determined outcomes in advance, locally, without any ghostly long-distance influence.</p>
+
+      <h2>Bohr's Reply</h2>
+      
+<figure class="article-figure">
+  <img src="assets/images/limits-of-the-universe.jpg" alt="Cosmic Horizons">
+  <figcaption>Fig 1.1: Visualising observational boundaries within expanding space-time.</figcaption>
+</figure>
+      
+      <p>The response came from Niels Bohr, Einstein's great intellectual sparring partner, the architect of the Copenhagen interpretation of quantum mechanics. Bohr's reply, published the same year, was characteristically dense — so much so that many physicists found it almost impenetrable.</p>
+
+      <p>But Bohr's core point was clear: Einstein's framework of "elements of reality" was itself flawed. In quantum mechanics, properties do not exist independently of measurement. There is no deeper hidden reality waiting to be uncovered — the act of observation is itself part of what constitutes physical reality. To demand that particles have definite properties before measurement is to import classical assumptions into a domain where they do not belong.</p>
+
+      <p>The two giants of modern physics would debate this for the rest of their lives, never fully resolving it. For decades, the question seemed to be merely philosophical — a matter of interpretation, with no experimental test capable of settling it. Then came John Bell.</p>
+
+      <div class="section-break"><span>✦</span></div>
+
+      <h2>Bell's Theorem: Making It Testable</h2>
+
+      <p>In 1964, the Irish physicist John Stewart Bell did something extraordinary. He took Einstein's intuition about hidden variables — the idea that quantum mechanics was incomplete — and translated it into a concrete, testable mathematical inequality. If hidden variables existed, Bell showed, then correlations between distant measurements must obey certain statistical limits. Quantum mechanics, however, predicted those limits would be <em>violated</em>.</p>
+
+      <p>This was no longer philosophy. It was physics. And it could be tested in a laboratory.</p>
+
+      <p>The experiments came in waves. Alain Aspect and his team in Paris conducted landmark tests in the early 1980s, measuring polarisation correlations in pairs of photons flying apart at the speed of light. The results were unambiguous: the Bell inequalities were violated, exactly as quantum mechanics predicted. Hidden variables of the classical kind Einstein imagined could not account for what was observed.</p>
+
+      <blockquote>
+        "Nature is not locally real." The results forced a choice: either abandon locality — the idea that objects are only influenced by their immediate surroundings — or abandon realism — the idea that objects have definite properties independent of observation. You cannot have both.
+      </blockquote>
+
+      <h2>What Entanglement Actually Means</h2>
+
+      <p>It is important to be precise here, because entanglement is one of the most misunderstood concepts in popular science. Entanglement does <strong>not</strong> allow faster-than-light communication. When you measure one particle and find its spin is "up," you instantly know its entangled partner will be measured as "down" — but you cannot use this to send a signal, because the outcome on your end is random. You cannot control what you measure; you can only observe it.</p>
+
+      <p>What entanglement establishes is something deeper and stranger: that the universe maintains correlations between distant events that cannot be explained by any local, pre-existing plan. The particles do not carry hidden instructions written at birth. Their properties, in a very real sense, are not determined until the moment of measurement — and yet they are correlated across arbitrary distances.</p>
+
+      <h2>Einstein's Legacy</h2>
+
+      <p>Was Einstein wrong? In one sense, yes. His hope for a locally realistic hidden-variable theory has been decisively ruled out by experiment. The universe is not the way he wanted it to be.</p>
+
+      <p>And yet Einstein was not simply wrong. His challenge to quantum mechanics forced the field to sharpen its foundations in ways that might never have happened otherwise. The EPR paper, intended as a refutation, gave birth to the deepest programme in the foundations of quantum mechanics. Bell's theorem — one of the most profound results in 20th-century physics — would not exist without Einstein's challenge.</p>
+
+      <p>More than that, the technologies that entanglement has since enabled — quantum cryptography, quantum computing, quantum teleportation of information — emerged precisely because physicists were forced, by Einstein's dissatisfaction, to take entanglement seriously as a physical resource rather than a philosophical embarrassment.</p>
+
+      <blockquote>
+        The spookiness Einstein found so disturbing turned out to be not a flaw in the theory, but a feature of reality itself.
+      </blockquote>
+
+      <p>Quantum mechanics is strange. Einstein knew it was strange. He spent thirty years insisting that its strangeness was a sign of incompleteness. He was wrong about that — but the conversation he started reshaped physics in ways that outlived him by decades, and continues to shape it still.</p>
+
+    </div>
+
+  </div>
+
+  <footer class="article-footer">
+    <a class="back-link" href="index.html#blogs">← Back to Writing</a>
+    <p>© 2025 Syed Noorulla Sha Quadri · Built with curiosity.</p>
+  </footer>
+  
+  <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+
+  <script>
+    const canvas = document.getElementById('universe');
+    const ctx = canvas.getContext('2d');
+    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    resize();
+    window.addEventListener('resize', () => { resize(); initStars(); });
+    let stars = [];
+    function initStars() {
+      stars = [];
+      const count = Math.floor((canvas.width * canvas.height) / 3500);
+      for (let i = 0; i < count; i++) {
+        const r = Math.random();
+        stars.push({
+          x: Math.random() * canvas.width, y: Math.random() * canvas.height,
+          radius: r < 0.7 ? Math.random() * 0.6 + 0.2 : r < 0.92 ? Math.random() * 0.8 + 0.6 : Math.random() * 1.2 + 1.0,
+          alpha: Math.random() * 0.5 + 0.3,
+          twinkleSpeed: Math.random() * 0.008 + 0.002,
+          twinklePhase: Math.random() * Math.PI * 2,
+          hue: Math.random() < 0.15 ? (Math.random() < 0.5 ? 'rgba(180,200,255,' : 'rgba(255,220,180,') : 'rgba(255,255,255,'
+        });
+      }
+    }
+    initStars();
+    let t = 0;
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      t += 0.016;
+      stars.forEach(s => {
+        const a = s.alpha + Math.sin(t * s.twinkleSpeed * 60 + s.twinklePhase) * 0.15;
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+        ctx.fillStyle = s.hue + Math.max(0.05, a) + ')';
+        ctx.fill();
+      });
+      requestAnimationFrame(draw);
+    }
+    draw();
+
+    // Bind Medium Zoom animation to your figure elements
+    mediumZoom('.article-figure img', {
+      background: 'rgba(7, 7, 15, 0.95)', /* Matches your custom space background color */
+      margin: 40
+    });
+  </script>
+  
+</body>
+</html>
