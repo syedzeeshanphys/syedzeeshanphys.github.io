@@ -8,18 +8,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
       --bg: #07070f;
       --text: #eeeae2;
       --muted: #9b97a0;
       --accent: #d4845a;
       --border: rgba(255,255,255,0.08);
-      --card-bg: rgba(255,255,255,0.04);
     }
-
     html { scroll-behavior: smooth; }
-
     body {
       background: var(--bg);
       color: var(--text);
@@ -29,8 +25,6 @@
       font-size: 17px;
       overflow-x: hidden;
     }
-
-    /* nebula glow */
     body::before {
       content: '';
       position: fixed;
@@ -39,248 +33,58 @@
       background:
         radial-gradient(ellipse 60% 50% at 15% 30%, rgba(90,40,140,0.18) 0%, transparent 70%),
         radial-gradient(ellipse 50% 40% at 80% 70%, rgba(30,80,160,0.14) 0%, transparent 65%),
-        radial-gradient(ellipse 40% 55% at 60% 10%, rgba(180,60,80,0.10) 0%, transparent 65%);
+        radial-gradient(ellipse 40% 55% at 60% 10%, rgba(20,60,140,0.12) 0%, transparent 65%);
       pointer-events: none;
     }
+    #universe { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
 
-    #universe {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(7,7,15,0.75);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.1rem 5vw;
-      position: relative;
-      z-index: 10;
-    }
-    .nav-name {
-      font-family: 'Lora', serif;
-      font-size: 1.05rem;
-      font-weight: 600;
-      color: var(--text);
-      text-decoration: none;
-    }
-    .nav-back {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 400;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-    .nav-back:hover { color: var(--accent); }
-
-    /* ── HERO IMAGE ── */
-    .article-hero {
-      position: relative;
-      z-index: 2;
-      width: 100%;
-      max-height: 520px;
-      overflow: hidden;
-    }
-    .article-hero img {
-      width: 100%;
-      height: 520px;
-      object-fit: cover;
-      display: block;
-      filter: brightness(0.75);
-    }
+    .article-hero { position: relative; z-index: 2; width: 100%; max-height: 520px; overflow: hidden; }
+    .article-hero img { width: 100%; height: 520px; object-fit: cover; display: block; filter: brightness(0.7); }
     .hero-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to bottom,
-        transparent 30%,
-        rgba(7,7,15,0.6) 70%,
-        var(--bg) 100%
-      );
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 25%, rgba(7,7,15,0.55) 65%, var(--bg) 100%);
     }
-
-    /* ── ARTICLE WRAPPER ── */
-    .article-wrapper {
-      position: relative;
-      z-index: 2;
-      max-width: 700px;
-      margin: 0 auto;
-      padding: 0 5vw 6rem;
-    }
-
-    /* ── ARTICLE HEADER ── */
-    .article-header {
-      margin-top: -80px;
-      margin-bottom: 3rem;
-    }
+    .article-wrapper { position: relative; z-index: 2; max-width: 700px; margin: 0 auto; padding: 0 5vw 6rem; }
+    .article-header { margin-top: -80px; margin-bottom: 3rem; }
     .article-topic {
-      display: inline-block;
-      font-size: 0.72rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--accent);
-      font-weight: 500;
-      margin-bottom: 1rem;
+      display: inline-block; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--accent); font-weight: 500; margin-bottom: 1rem;
     }
     .article-title {
-      font-family: 'Lora', serif;
-      font-size: clamp(2rem, 5vw, 3.2rem);
-      font-weight: 700;
-      line-height: 1.15;
-      color: #f5f0e8;
-      margin-bottom: 1.2rem;
+      font-family: 'Lora', serif; font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 700; line-height: 1.15; color: #f5f0e8; margin-bottom: 1.2rem;
     }
     .article-subtitle {
-      font-size: 1.15rem;
-      color: var(--muted);
-      line-height: 1.75;
-      font-style: italic;
-      font-family: 'Lora', serif;
-      margin-bottom: 2rem;
-      max-width: 600px;
+      font-size: 1.15rem; color: var(--muted); line-height: 1.75;
+      font-style: italic; font-family: 'Lora', serif; margin-bottom: 2rem; max-width: 600px;
     }
     .article-meta {
-      display: flex;
-      align-items: center;
-      gap: 1.2rem;
-      font-size: 0.82rem;
-      color: var(--muted);
-      padding: 1.4rem 0;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 1.2rem; font-size: 0.82rem; color: var(--muted);
+      padding: 1.4rem 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
     }
-    .meta-author {
-      font-weight: 500;
-      color: #d8d3cc;
-    }
+    .meta-author { font-weight: 500; color: #d8d3cc; }
     .meta-dot { opacity: 0.4; }
-
-    /* ── ARTICLE BODY ── */
-    .article-body {
-      margin-top: 2.8rem;
-    }
-    .article-body p {
-      font-size: 1.08rem;
-      line-height: 1.9;
-      color: #cec9c1;
-      margin-bottom: 1.8rem;
-    }
-    .article-body h2 {
-      font-family: 'Lora', serif;
-      font-size: 1.65rem;
-      font-weight: 600;
-      color: #f5f0e8;
-      margin: 3rem 0 1.2rem;
-      line-height: 1.3;
-    }
-    .article-body h3 {
-      font-family: 'Lora', serif;
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: #e8e3da;
-      margin: 2.2rem 0 0.9rem;
-      font-style: italic;
-    }
+    .article-body { margin-top: 2.8rem; }
+    .article-body p { font-size: 1.08rem; line-height: 1.9; color: #cec9c1; margin-bottom: 1.8rem; }
+    .article-body h2 { font-family: 'Lora', serif; font-size: 1.65rem; font-weight: 600; color: #f5f0e8; margin: 3rem 0 1.2rem; line-height: 1.3; }
+    .article-body h3 { font-family: 'Lora', serif; font-size: 1.2rem; font-weight: 600; color: #e8e3da; margin: 2.2rem 0 0.9rem; font-style: italic; }
     .article-body blockquote {
-      border-left: 3px solid var(--accent);
-      margin: 2.5rem 0;
-      padding: 0.5rem 0 0.5rem 2rem;
-      font-family: 'Lora', serif;
-      font-size: 1.18rem;
-      font-style: italic;
-      color: #d8d3cc;
-      line-height: 1.8;
+      border-left: 3px solid var(--accent); margin: 2.5rem 0; padding: 0.5rem 0 0.5rem 2rem;
+      font-family: 'Lora', serif; font-size: 1.18rem; font-style: italic; color: #d8d3cc; line-height: 1.8;
     }
-    .article-body strong {
-      color: #e8e3da;
-      font-weight: 500;
-    }
-    .article-body em {
-      color: #d8d3cc;
-      font-style: italic;
-    }
-
-    /* inline figure */
-    .article-figure {
-      margin: 3rem 0;
-    }
-    .article-figure img {
-      width: 100%;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      filter: brightness(0.85);
-    }
-    .article-figure figcaption {
-      font-size: 0.8rem;
-      color: var(--muted);
-      margin-top: 0.75rem;
-      text-align: center;
-      font-style: italic;
-    }
-
-    /* ── DIVIDER ── */
-    .section-break {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin: 3rem 0;
-      opacity: 0.35;
-    }
-    .section-break span { 
-      font-size: 1.2rem; 
-      color: var(--accent);
-    }
-    .section-break::before, .section-break::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-
-    /* ── FOOTER ── */
-    .article-footer {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      padding: 3rem 5vw;
-      border-top: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 0.82rem;
-    }
+    .article-body strong { color: #e8e3da; font-weight: 500; }
+    .article-body em { color: #d8d3cc; font-style: italic; }
+    .section-break { display: flex; align-items: center; gap: 1rem; margin: 3rem 0; opacity: 0.35; }
+    .section-break span { font-size: 1.2rem; color: var(--accent); }
+    .section-break::before, .section-break::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .article-footer { position: relative; z-index: 2; text-align: center; padding: 3rem 5vw; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.82rem; }
     .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: var(--accent);
-      text-decoration: none;
-      font-size: 0.88rem;
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      transition: opacity 0.2s;
-      margin-bottom: 1.5rem;
+      display: inline-flex; align-items: center; gap: 0.5rem; color: var(--accent); text-decoration: none;
+      font-size: 0.88rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
+      transition: opacity 0.2s; margin-bottom: 1.5rem;
     }
     .back-link:hover { opacity: 0.7; }
-
-    /* animation */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(18px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
     .article-header { animation: fadeUp 0.7s ease both; }
     .article-body   { animation: fadeUp 0.7s 0.15s ease both; }
   </style>
@@ -289,12 +93,11 @@
 
   <canvas id="universe"></canvas>
 
-  <nav style="position:sticky; top:0; z-index:100; background:rgba(7,7,15,0.75); backdrop-filter:blur(14px); border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; padding:1.1rem 5vw;">
-    <a class="nav-name" href="index.html">Syed Noorulla</a>
-    <a class="nav-back" href="index.html#blogs">← All Writing</a>
+  <nav style="position:sticky; top:0; z-index:100; background:rgba(7,7,15,0.75); backdrop-filter:blur(14px); border-bottom:1px solid rgba(255,255,255,0.08); display:flex; justify-content:space-between; align-items:center; padding:1.1rem 5vw;">
+    <a style="font-family:'Lora',serif; font-size:1.05rem; font-weight:600; color:#eeeae2; text-decoration:none;" href="index.html">Syed Noorulla</a>
+    <a style="color:#9b97a0; text-decoration:none; font-size:0.85rem; font-weight:400; letter-spacing:0.06em; text-transform:uppercase; transition:color 0.2s;" href="index.html#blogs" onmouseover="this.style.color='#d4845a'" onmouseout="this.style.color='#9b97a0'">← All Writing</a>
   </nav>
 
-  <!-- HERO IMAGE -->
   <div class="article-hero">
     <img src="assets/images/limits-of-the-universe.jpg" alt="Limits Of The Universe">
     <div class="hero-overlay"></div>
@@ -305,91 +108,79 @@
     <div class="article-header">
       <span class="article-topic">Cosmology · Special Relativity</span>
       <h1 class="article-title">Limits Of The Universe</h1>
-      <p class="article-subtitle">He called it "spooky action at a distance" and spent decades trying to disprove it. The debate that changed quantum mechanics forever.</p>
+      <p class="article-subtitle">How far does the universe stretch? Exploring cosmic horizons, relativity, and the ultimate limits of what humanity can ever know.</p>
       <div class="article-meta">
         <span class="meta-author">Syed Noorulla</span>
         <span class="meta-dot">·</span>
-        <span>8 min read</span>
+        <span>9 min read</span>
         <span class="meta-dot">·</span>
-        <span>Quantum Mechanics</span>
+        <span>Cosmology</span>
       </div>
     </div>
 
     <div class="article-body">
 
-      <p>In 1935, Albert Einstein sat down with two colleagues — Boris Podolsky and Nathan Rosen — and wrote one of the most provocative papers in the history of physics. Their target was quantum mechanics itself, the theory that had reshaped humanity's understanding of matter and energy. Their argument was elegant and devastating: quantum mechanics, they claimed, was <strong>incomplete</strong>.</p>
+      <p>There is a question so immense it resists easy framing: how far does the universe go? Not how far we have looked, not how far our telescopes reach — but the universe itself. Does it end? Does it curve back on itself? Is it genuinely, incomprehensibly infinite?</p>
 
-      <p>At the heart of their challenge was a phenomenon we now call <em>quantum entanglement</em> — and Einstein found it deeply, philosophically troubling. He had a word for it: <em>spukhafte Fernwirkung</em>. Spooky action at a distance.</p>
+      <p>The answer, frustratingly and fascinatingly, is that we do not know. But the reasons we do not know are themselves a window into some of the deepest physics ever discovered — and into the strange fact that the universe has drawn a veil around itself, a boundary we can never, even in principle, cross.</p>
 
-      <h2>The EPR Paradox</h2>
+      <h2>The Observable Universe</h2>
 
-      <p>The 1935 paper, known by its authors' initials as EPR, constructed a thought experiment of remarkable precision. Imagine two particles that interact briefly, then separate across vast distances. According to quantum mechanics, measuring one particle instantly determines something about the other — no matter how far apart they are. Not eventually. <strong>Instantly.</strong></p>
+      <p>Begin with what we can see. Light travels at a finite speed — approximately 299,792 kilometres per second. The universe, as best we can determine, is about 13.8 billion years old. That means light has had 13.8 billion years to travel toward us. Naively, you might expect the observable universe to extend about 13.8 billion light-years in every direction.</p>
+
+      <p>But here is where it gets strange. The universe has been <em>expanding</em> the entire time light has been travelling. Space itself has been stretching. A photon emitted from a galaxy 13.8 billion years ago has been riding a universe that has been growing beneath it, carrying it further along. When we account for this expansion, the observable universe turns out to extend approximately <strong>46 billion light-years</strong> in every direction — a sphere some 93 billion light-years across.</p>
 
       <blockquote>
-        "If, without in any way disturbing a system, we can predict with certainty the value of a physical quantity, then there exists an element of physical reality corresponding to that quantity."
+        We can see light that originated 46 billion light-years away, even though the universe is only 13.8 billion years old. The space between us and the source has stretched in the interim.
       </blockquote>
 
-      <p>Einstein's realism demanded a local explanation. Information, he believed, could not travel faster than light — that was a cornerstone of his own special relativity. If quantum mechanics allowed instantaneous correlations across space, then either the theory was telling an incomplete story, or the universe was playing tricks that violated the very fabric of causality.</p>
+      <p>This is our cosmic horizon — not a wall, not an edge, but a limit of visibility. Beyond it, the universe almost certainly continues. But light from those distant regions has not had time to reach us, and — given the accelerating expansion of space — it never will.</p>
 
-      <p>He was convinced it was the former. There must be <em>hidden variables</em> — deeper layers of reality that quantum mechanics had not yet uncovered — that determined outcomes in advance, locally, without any ghostly long-distance influence.</p>
+      <h2>The Expansion Is Accelerating</h2>
 
-      <h2>Bohr's Reply</h2>
-      
-<figure class="article-figure">
-  <img src="assets/images/limits-of-the-universe.jpg" alt="Cosmic Horizons">
-  <figcaption>Fig 1.1: Visualising observational boundaries within expanding space-time.</figcaption>
-</figure>
-      
-      <p>The response came from Niels Bohr, Einstein's great intellectual sparring partner, the architect of the Copenhagen interpretation of quantum mechanics. Bohr's reply, published the same year, was characteristically dense — so much so that many physicists found it almost impenetrable.</p>
+      <p>In 1998, two independent teams of astronomers studying distant supernovae made a discovery that upended cosmology. The universe is not merely expanding — it is expanding at an <em>accelerating rate</em>. The cause is attributed to something we call dark energy, a mysterious component that makes up approximately 68% of the total energy content of the universe, yet whose nature remains almost entirely unknown.</p>
 
-      <p>But Bohr's core point was clear: Einstein's framework of "elements of reality" was itself flawed. In quantum mechanics, properties do not exist independently of measurement. There is no deeper hidden reality waiting to be uncovered — the act of observation is itself part of what constitutes physical reality. To demand that particles have definite properties before measurement is to import classical assumptions into a domain where they do not belong.</p>
+      <p>The consequence for our cosmic horizon is profound. As expansion accelerates, galaxies beyond a certain distance are being carried away from us faster than light can cross the growing gap. They have already crossed a threshold called the <strong>Hubble horizon</strong> — the distance at which recession speed equals the speed of light. Light emitted by those galaxies today will never reach us. They are gone from our observable future.</p>
 
-      <p>The two giants of modern physics would debate this for the rest of their lives, never fully resolving it. For decades, the question seemed to be merely philosophical — a matter of interpretation, with no experimental test capable of settling it. Then came John Bell.</p>
+      <p>More unsettling still: over cosmic timescales, even some galaxies we can currently see will eventually be swept beyond our reach. The night sky of the far future will be emptier — not because the stars have died, but because the universe will have carried them away, out of sight and out of contact forever.</p>
 
       <div class="section-break"><span>✦</span></div>
 
-      <h2>Bell's Theorem: Making It Testable</h2>
+      <h2>What Relativity Says About Limits</h2>
 
-      <p>In 1964, the Irish physicist John Stewart Bell did something extraordinary. He took Einstein's intuition about hidden variables — the idea that quantum mechanics was incomplete — and translated it into a concrete, testable mathematical inequality. If hidden variables existed, Bell showed, then correlations between distant measurements must obey certain statistical limits. Quantum mechanics, however, predicted those limits would be <em>violated</em>.</p>
+      <p>Special relativity places its own hard limit on what any observer can know. Nothing carrying information — no particle, no signal, no influence of any kind — can travel faster than light in a vacuum. This is not merely a technological barrier. It is a structural feature of spacetime.</p>
 
-      <p>This was no longer philosophy. It was physics. And it could be tested in a laboratory.</p>
+      <p>The consequence is a concept called <em>causal structure</em>. Every event in spacetime has a region of influence — a "light cone" — within which it can send signals, and from which it can receive them. Events outside the light cone are, by construction, causally disconnected. They cannot affect you; you cannot affect them. The universe arranges itself into regions of mutual influence separated by unbridgeable causal horizons.</p>
 
-      <p>The experiments came in waves. Alain Aspect and his team in Paris conducted landmark tests in the early 1980s, measuring polarisation correlations in pairs of photons flying apart at the speed of light. The results were unambiguous: the Bell inequalities were violated, exactly as quantum mechanics predicted. Hidden variables of the classical kind Einstein imagined could not account for what was observed.</p>
+      <p>General relativity adds further complications. Around black holes, for instance, there is an <em>event horizon</em> — a surface from within which no signal can escape to the outside universe. An observer falling into a black hole crosses this horizon without feeling anything dramatic at the moment of crossing, but can never communicate with the world they left behind. The causal disconnection is absolute and permanent.</p>
 
-      <blockquote>
-        "Nature is not locally real." The results forced a choice: either abandon locality — the idea that objects are only influenced by their immediate surroundings — or abandon realism — the idea that objects have definite properties independent of observation. You cannot have both.
-      </blockquote>
+      <h2>The Edge of Knowledge</h2>
 
-      <h2>What Entanglement Actually Means</h2>
+      <p>Perhaps the deepest limit is not spatial at all. Even if we could somehow survey the entire observable universe perfectly, we would still be sampling a single point in a vastly larger cosmic landscape — if the inflationary picture of the early universe is correct.</p>
 
-      <p>It is important to be precise here, because entanglement is one of the most misunderstood concepts in popular science. Entanglement does <strong>not</strong> allow faster-than-light communication. When you measure one particle and find its spin is "up," you instantly know its entangled partner will be measured as "down" — but you cannot use this to send a signal, because the outcome on your end is random. You cannot control what you measure; you can only observe it.</p>
-
-      <p>What entanglement establishes is something deeper and stranger: that the universe maintains correlations between distant events that cannot be explained by any local, pre-existing plan. The particles do not carry hidden instructions written at birth. Their properties, in a very real sense, are not determined until the moment of measurement — and yet they are correlated across arbitrary distances.</p>
-
-      <h2>Einstein's Legacy</h2>
-
-      <p>Was Einstein wrong? In one sense, yes. His hope for a locally realistic hidden-variable theory has been decisively ruled out by experiment. The universe is not the way he wanted it to be.</p>
-
-      <p>And yet Einstein was not simply wrong. His challenge to quantum mechanics forced the field to sharpen its foundations in ways that might never have happened otherwise. The EPR paper, intended as a refutation, gave birth to the deepest programme in the foundations of quantum mechanics. Bell's theorem — one of the most profound results in 20th-century physics — would not exist without Einstein's challenge.</p>
-
-      <p>More than that, the technologies that entanglement has since enabled — quantum cryptography, quantum computing, quantum teleportation of information — emerged precisely because physicists were forced, by Einstein's dissatisfaction, to take entanglement seriously as a physical resource rather than a philosophical embarrassment.</p>
+      <p>Cosmic inflation — the theory that the universe underwent a period of exponential expansion a tiny fraction of a second after the Big Bang — predicts that the universe is enormously larger than the observable patch we inhabit. Some versions of the theory suggest the universe is effectively infinite. Others allow for a multiverse of causally disconnected regions, each potentially with different physical constants, different laws.</p>
 
       <blockquote>
-        The spookiness Einstein found so disturbing turned out to be not a flaw in the theory, but a feature of reality itself.
+        We are, in the most literal sense, prisoners of our own light cone — able to see and know only that which has had time to reach us across the history of the cosmos.
       </blockquote>
 
-      <p>Quantum mechanics is strange. Einstein knew it was strange. He spent thirty years insisting that its strangeness was a sign of incompleteness. He was wrong about that — but the conversation he started reshaped physics in ways that outlived him by decades, and continues to shape it still.</p>
+      <p>Whether those other regions exist, and what they contain, we will never be able to determine by observation. They are, by definition, beyond every horizon we have discussed. They are not merely unknown — they are, in principle, unknowable.</p>
+
+      <h2>Living at the Edge</h2>
+
+      <p>There is something both humbling and exhilarating about these limits. Humbling, because they remind us how small our window onto the cosmos truly is. We inhabit one pale point in a universe that stretches — in all likelihood — far beyond anything our instruments will ever reach.</p>
+
+      <p>But also exhilarating, because we have arrived at these conclusions through mathematics, through the logic of physical law, through careful observation of the light that has managed to reach us. We know the horizons exist. We know approximately where they lie. We can reason about what lies beyond them even when we cannot see it.</p>
+
+      <p>That is perhaps the most remarkable thing of all: that creatures on a small rocky planet circling an ordinary star, in the outer regions of an unremarkable galaxy, have managed to map the boundaries of their own cosmic prison — and to understand why those boundaries are there.</p>
 
     </div>
-
   </div>
 
   <footer class="article-footer">
     <a class="back-link" href="index.html#blogs">← Back to Writing</a>
     <p>© 2025 Syed Noorulla Sha Quadri · Built with curiosity.</p>
   </footer>
-  
-  <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
 
   <script>
     const canvas = document.getElementById('universe');
@@ -420,21 +211,12 @@
       t += 0.016;
       stars.forEach(s => {
         const a = s.alpha + Math.sin(t * s.twinkleSpeed * 60 + s.twinklePhase) * 0.15;
-        ctx.beginPath();
-        ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
-        ctx.fillStyle = s.hue + Math.max(0.05, a) + ')';
-        ctx.fill();
+        ctx.beginPath(); ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+        ctx.fillStyle = s.hue + Math.max(0.05, a) + ')'; ctx.fill();
       });
       requestAnimationFrame(draw);
     }
     draw();
-
-    // Bind Medium Zoom animation to your figure elements
-    mediumZoom('.article-figure img', {
-      background: 'rgba(7, 7, 15, 0.95)', /* Matches your custom space background color */
-      margin: 40
-    });
   </script>
-  
 </body>
 </html>
