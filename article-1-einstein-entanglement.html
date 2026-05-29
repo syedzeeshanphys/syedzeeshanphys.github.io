@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Einstein And Entanglement — Syed Noorulla</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #07070f;
+      --text: #eeeae2;
+      --muted: #9b97a0;
+      --accent: #d4845a;
+      --border: rgba(255,255,255,0.08);
+      --card-bg: rgba(255,255,255,0.04);
+      --glass: rgba(7,7,15,0.72);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.75;
+      font-size: 17px;
+      overflow-x: hidden;
+    }
+
+    #universe {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 15% 30%, rgba(90,40,140,0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 80% 70%, rgba(30,80,160,0.14) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 55% at 60% 10%, rgba(180,60,80,0.10) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    nav, header, main, footer { position: relative; z-index: 2; }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7,7,15,0.75);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 5vw;
+    }
+    .nav-name {
+      font-family: 'Lora', serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ARTICLE HEADER */
+    header {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 7rem 5vw 4rem;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 2.5rem;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--accent); }
+    .article-topic {
+      display: inline-block;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+      font-weight: 500;
+    }
+    h1 {
+      font-family: 'Lora', serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 600;
+      line-height: 1.18;
+      margin-bottom: 1.5rem;
+      color: #f5f0e8;
+    }
+    .article-meta {
+      color: var(--muted);
+      font-size: 0.85rem;
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ARTICLE BODY */
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 3.5rem 5vw 6rem;
+    }
+    main p {
+      color: var(--muted);
+      margin-bottom: 1.6rem;
+      font-size: 1.02rem;
+      line-height: 1.9;
+    }
+    main p strong {
+      color: #d8d3cc;
+      font-weight: 500;
+    }
+    .pullquote {
+      border-left: 2px solid var(--accent);
+      padding: 1rem 0 1rem 1.8rem;
+      margin: 2.5rem 0;
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 1.15rem;
+      color: #d8d3cc;
+      line-height: 1.7;
+    }
+    .article-divider {
+      width: 40px;
+      height: 1px;
+      background: var(--accent);
+      margin: 2.8rem 0;
+      opacity: 0.5;
+    }
+
+    /* FOOTER NAV */
+    .article-footer-nav {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 2.5rem 5vw 4rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .article-footer-nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .article-footer-nav a:hover { color: var(--accent); }
+
+    footer {
+      text-align: center;
+      padding: 2rem 5vw;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    header, main { animation: fadeUp 0.7s ease both; }
+    main { animation-delay: 0.1s; }
+  </style>
+</head>
+<body>
+  <canvas id="universe"></canvas>
+
+  <nav>
+    <a class="nav-name" href="index.html">Syed Noorulla</a>
+    <ul class="nav-links">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#blogs">Writing</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header>
+    <a class="back-link" href="index.html">← All Articles</a>
+    <p class="article-topic">Quantum Mechanics · History of Physics</p>
+    <h1>Einstein And Entanglement</h1>
+    <div class="article-meta">
+      <span>By Syed Noorulla Sha Quadri</span>
+      <span>Article 1 of 7</span>
+    </div>
+  </header>
+
+  <main>
+    <p>
+      Albert Einstein's relationship with quantum mechanics is indeed complex and pivotal in the history of physics. While he was one of the founding fathers of quantum theory, he famously had problems with it, mainly its indeterminism and entanglement.
+    </p>
+
+    <p>
+      Einstein's debates with Niels Bohr epitomize the clash between two views on quantum mechanics. Bohr happily accepted the probabilistic nature of quantum mechanics and its implications, however, Einstein was not happy with it and was skeptical.
+    </p>
+
+    <div class="pullquote">
+      "God does not play dice with the universe."
+      <br><span style="font-size:0.82rem; font-style:normal; color:var(--muted); font-family:'DM Sans',sans-serif; letter-spacing:0.06em; text-transform:uppercase;">— Albert Einstein</span>
+    </div>
+
+    <p>
+      This famous remark conveys his discomfort with the randomness of quantum mechanics, which opposes the deterministic nature of classical mechanics.
+    </p>
+
+    <div class="article-divider"></div>
+
+    <p>
+      Einstein's challenge was mainly centered on <strong>entanglement</strong> — a phenomenon where the quantum states of two particles become interconnected such that the state of one instantaneously affects the state of the other, no matter the distance separating them. This phenomenon, which Einstein sarcastically called <em>"spooky action at a distance,"</em> challenged the notions of locality and reality in classical physics.
+    </p>
+
+    <p>
+      Bohr's response to entanglement was mainly to uphold the Copenhagen interpretation of quantum mechanics, which suggests that particles do not have definite properties until they are observed. Bohr accepted entanglement as a natural consequence of quantum mechanics without being irritated by its complex nature.
+    </p>
+
+    <p>
+      To explain all this, Einstein, Podolsky, and Rosen came up with an argument now famously known as <strong>EPR</strong>, which stated that there must be "hidden variables" that determine the outcomes of measurements in a way that respects locality and causality. Locality means that an object in a system is only influenced by its immediate surroundings, whereas causality means that an effect cannot occur without a cause and that causal influences cannot travel faster than light.
+    </p>
+
+    <div class="article-divider"></div>
+
+    <p>
+      Niels Bohr again opposed EPR by rejecting hidden variables, as it would again bring in determinism. Schrödinger and Wendell Furry, on the other hand, proposed an alternative viewpoint — they suggested that entanglement might only be relevant over short distances and that it would "vanish" or become irrelevant with wide particle separation. This idea was an attempt to reconcile quantum mechanics with classical intuitions.
+    </p>
+
+    <p>
+      However, experiments and developments in quantum theory have largely supported Bohr's interpretation, demonstrating the non-existence of hidden variables and confirming the reality of entanglement across large distances. <strong>China's Micius satellite</strong> shows how quantum entanglement can be used in real-world applications. It uses quantum-encrypted communications, which use entangled particles to create secure, unbreakable communication channels — proving that we can leverage this phenomenon over vast distances and demonstrating the strength and scalability of quantum entanglement.
+    </p>
+  </main>
+
+  <div class="article-footer-nav">
+    <a href="index.html">← Back to all articles</a>
+    <a href="article-2-limits-of-the-universe.html">Next: Limits of the Universe →</a>
+  </div>
+
+  <footer>© 2025 Syed Noorulla Sha Quadri · Built with curiosity.</footer>
+
+  <script>
+    const canvas = document.getElementById('universe');
+    const ctx = canvas.getContext('2d');
+    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    resize();
+    window.addEventListener('resize', () => { resize(); initStars(); });
+    let stars = [];
+    function initStars() {
+      stars = [];
+      const count = Math.floor((canvas.width * canvas.height) / 3000);
+      for (let i = 0; i < count; i++) {
+        const r = Math.random();
+        stars.push({
+          x: Math.random() * canvas.width, y: Math.random() * canvas.height,
+          radius: r < 0.7 ? Math.random() * 0.6 + 0.2 : r < 0.92 ? Math.random() * 0.8 + 0.6 : Math.random() * 1.2 + 1.0,
+          alpha: Math.random() * 0.5 + 0.3, twinkleSpeed: Math.random() * 0.008 + 0.002,
+          twinklePhase: Math.random() * Math.PI * 2,
+          hue: Math.random() < 0.15 ? (Math.random() < 0.5 ? 'rgba(180,200,255,' : 'rgba(255,220,180,') : 'rgba(255,255,255,'
+        });
+      }
+    }
+    initStars();
+    const shooters = [];
+    let t = 0;
+    function drawStar(cx, cy, r, alpha) {
+      const spikes = 4, inner = r * 0.45;
+      ctx.save(); ctx.translate(cx, cy); ctx.rotate(Math.PI / 4);
+      ctx.beginPath();
+      for (let i = 0; i < spikes * 2; i++) {
+        const rad = i % 2 === 0 ? r : inner;
+        const angle = (i * Math.PI) / spikes;
+        i === 0 ? ctx.moveTo(Math.cos(angle)*rad, Math.sin(angle)*rad) : ctx.lineTo(Math.cos(angle)*rad, Math.sin(angle)*rad);
+      }
+      ctx.closePath();
+      ctx.fillStyle = `rgba(255,255,240,${alpha})`; ctx.shadowColor = 'rgba(220,210,255,0.9)'; ctx.shadowBlur = 8; ctx.fill(); ctx.restore();
+    }
+    function spawnShooter() {
+      const angle = (Math.random() * 20 + 25) * Math.PI / 180;
+      const speed = Math.random() * 6 + 7;
+      shooters.push({ x: Math.random() * canvas.width * 0.75 + canvas.width * 0.05, y: Math.random() * canvas.height * 0.45 + canvas.height * 0.05, vx: Math.cos(angle)*speed, vy: Math.sin(angle)*speed, life: 1.0, decay: Math.random() * 0.018 + 0.014, trail: [], radius: Math.random() * 2.5 + 2.5 });
+    }
+    function drawAll() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height); t += 0.016;
+      stars.forEach(s => {
+        const a = s.alpha + Math.sin(t * s.twinkleSpeed * 60 + s.twinklePhase) * 0.15;
+        ctx.beginPath(); ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+        ctx.fillStyle = s.hue + Math.max(0.05, a) + ')'; ctx.fill();
+      });
+      for (let i = shooters.length - 1; i >= 0; i--) {
+        const s = shooters[i];
+        s.trail.push({ x: s.x, y: s.y, life: s.life });
+        if (s.trail.length > 28) s.trail.shift();
+        for (let j = 1; j < s.trail.length; j++) {
+          const p0 = s.trail[j-1], p1 = s.trail[j], frac = j / s.trail.length;
+          ctx.beginPath(); ctx.moveTo(p0.x, p0.y); ctx.lineTo(p1.x, p1.y);
+          ctx.strokeStyle = `rgba(220,215,255,${frac * s.life * 0.55})`; ctx.lineWidth = frac * s.radius * 0.55; ctx.lineCap = 'round'; ctx.shadowBlur = 0; ctx.stroke();
+        }
+        drawStar(s.x, s.y, s.radius * (0.7 + 0.3 * s.life), s.life * 0.95);
+        s.x += s.vx; s.y += s.vy; s.life -= s.decay;
+        if (s.life <= 0) shooters.splice(i, 1);
+      }
+      requestAnimationFrame(drawAll);
+    }
+    drawAll();
+    function scheduleShooter() { spawnShooter(); setTimeout(scheduleShooter, Math.random() * 5000 + 3000); }
+    setTimeout(scheduleShooter, 1500);
+  </script>
+</body>
+</html>
