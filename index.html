@@ -89,11 +89,26 @@
     }
     .nav-links a:hover { color: var(--accent); }
 
-    /* ── HERO ── */
+   /* ── HERO ── */
     header {
       max-width: 720px;
       margin: 0 auto;
       padding: 8rem 5vw 6rem;
+      display: flex;
+      align-items: center;
+      gap: 3rem; /* Space between image and text */
+    }
+    .hero-img {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%; /* Makes your picture a circle */
+      object-fit: cover;
+      border: 2px solid var(--border);
+      box-shadow: 0 0 20px rgba(212, 132, 90, 0.15); /* Subtle accent glow */
+      flex-shrink: 0;
+    }
+    .hero-content {
+      flex: 1;
     }
     .tag {
       display: inline-block;
@@ -106,7 +121,7 @@
     }
     h1 {
       font-family: 'Lora', serif;
-      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      font-size: clamp(2rem, 4vw, 3rem); /* Slightly adjusted to fit side-by-side nicely */
       font-weight: 600;
       line-height: 1.15;
       margin-bottom: 1.5rem;
@@ -120,6 +135,17 @@
       line-height: 1.85;
     }
     .hero-sub strong { color: #d8d3cc; font-weight: 400; }
+
+    /* Responsive adjustment for small screens/phones */
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 5rem;
+        gap: 1.5rem;
+      }
+      .hero-sub { margin: 0 auto; }
+    }
 
     /* ── DIVIDER ── */
     .divider {
@@ -290,13 +316,17 @@
   </nav>
 
   <header>
-    <span class="tag">Physics · Writing · Research</span>
-    <h1>Thinking out loud<br>about the <em>universe.</em></h1>
-    <p class="hero-sub">
-      I'm a physics undergraduate fascinated by <strong>time, entropy, and the deep structure of reality</strong> —
-      writing at the edge of science and philosophy.
-    </p>
-    <div class="divider"></div>
+    <img class="hero-img" src="assets/images/profile.jpg" alt="Syed Noorulla">
+
+    <div class="hero-content">
+      <span class="tag">Physics · Writing · Research</span>
+      <h1>Thinking out loud<br>about the <em>universe.</em></h1>
+      <p class="hero-sub">
+        I'm a physics undergraduate fascinated by <strong>time, entropy, and the deep structure of reality</strong> —
+        writing at the edge of science and philosophy.
+      </p>
+      <div class="divider"></div>
+    </div>
   </header>
 
   <!-- ABOUT -->
