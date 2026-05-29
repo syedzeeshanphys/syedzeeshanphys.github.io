@@ -181,11 +181,11 @@
 
     /* ── BLOG CARDS ── */
     .blogs-grid { display: flex; flex-direction: column; }
-    .blog-card {
+  .blog-card {
       display: grid;
-      grid-template-columns: 1fr auto;
-      align-items: start;
-      gap: 1rem;
+      grid-template-columns: 1fr 100px auto; /* Text column, Image column, Arrow column */
+      align-items: center;
+      gap: 1.5rem;
       padding: 1.8rem 0;
       border-bottom: 1px solid var(--border);
       text-decoration: none;
@@ -194,6 +194,25 @@
     }
     .blog-card:first-child { border-top: 1px solid var(--border); }
     .blog-card:hover { opacity: 0.65; }
+
+    /* Style for the new article thumbnails */
+    .card-img {
+      width: 100px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+    }
+    /* Style for the new article thumbnails */
+    .card-img {
+      width: 100px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+    }
     .card-topic {
       font-size: 0.69rem;
       letter-spacing: 0.1em;
@@ -325,47 +344,43 @@
   </section>
 
   <!-- BLOGS -->
-  <section id="blogs">
+<section id="blogs">
     <p class="section-label">Blogs</p>
     <h2>Selected writing</h2>
     <div class="blogs-grid">
 
-     <a class="blog-card" href="article-1-einstein-entanglement.html">
-  <div>
-    <p class="card-topic">Quantum Mechanics · History of Physics</p>
-    <p class="card-title">Einstein And Entanglement</p>
-    <p class="card-desc">
-      Einstein called it "spooky action at a distance" and spent decades trying to disprove it. The debate that changed quantum mechanics forever.
-    </p>
-  </div>
-  <span class="card-arrow">→</span>
-</a>
+      <a class="blog-card" href="article-1-einstein-entanglement.html">
+        <div>
+          <p class="card-topic">Quantum Mechanics · History of Physics</p>
+          <p class="card-title">Einstein And Entanglement</p>
+          <p class="card-desc">Einstein called it "spooky action at a distance" and spent decades trying to disprove it. The debate that changed quantum mechanics forever.</p>
+        </div>
+        <img class="card-img" src="assets/images/entanglement.jpg" alt="Einstein And Entanglement">
+        <span class="card-arrow">→</span>
+      </a>
 
-<a class="blog-card" href="article-2-limits-of-the-universe.html">
-  <div>
-    <p class="card-topic">Cosmology · Special Relativity</p>
-    <p class="card-title">Limits Of The Universe</p>
-    <p class="card-desc">
-      How far does the universe stretch? Exploring cosmic horizons, relativity, and the ultimate limits of what humanity can ever know.
-    </p>
-  </div>
-  <span class="card-arrow">→</span>
-</a>
+      <a class="blog-card" href="article-2-limits-of-the-universe.html">
+        <div>
+          <p class="card-topic">Cosmology · Special Relativity</p>
+          <p class="card-title">Limits Of The Universe</p>
+          <p class="card-desc">How far does the universe stretch? Exploring cosmic horizons, relativity, and the ultimate limits of what humanity can ever know.</p>
+        </div>
+        <img class="card-img" src="assets/images/universe-limits.jpg" alt="Limits Of The Universe">
+        <span class="card-arrow">→</span>
+      </a>
 
-<a class="blog-card" href="article-3-boltzmann.html">
-  <div>
-    <p class="card-topic">Thermodynamics · History of Science</p>
-    <p class="card-title">Ludwig Boltzmann: The Genius of Disorder</p>
-    <p class="card-desc">
-      The physicist who explained entropy, embraced randomness, and transformed our understanding of the universe.
-    </p>
-  </div>
-  <span class="card-arrow">→</span>
-</a>
-
+      <a class="blog-card" href="article-3-boltzmann.html">
+        <div>
+          <p class="card-topic">Thermodynamics · History of Science</p>
+          <p class="card-title">Ludwig Boltzmann: The Genius of Disorder</p>
+          <p class="card-desc">The physicist who explained entropy, embraced randomness, and transformed our understanding of the universe.</p>
+        </div>
+        <img class="card-img" src="assets/images/boltzmann.jpg" alt="Ludwig Boltzmann">
+        <span class="card-arrow">→</span>
+      </a>
+      
     </div>
   </section>
-
   <!-- CONTACT -->
   <section id="contact">
     <p class="section-label">Contact</p>
