@@ -1,31 +1,61 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Syed Zeeshan | Physics</title>
-</head>
-<body>
+---
+layout: default
+title: Home
+---
 
-<h1>Syed Zeeshan</h1>
+{% if page.url == "/" %}
 
-<p>
-Physics Student | Scientific Writer | Cosmology Enthusiast
-</p>
+<!-- Featured
+================================================== -->
+<section class="featured-posts">
+    <div class="section-title">
+        <h2><span>Featured</span></h2>
+    </div>
+    <div class="row">
 
-<h2>Articles</h2>
+    {% for post in site.posts %}
 
-<ul>
-<li>What is Spacetime?</li>
-<li>Introduction to General Relativity</li>
-<li>Quantum Mechanics for Beginners</li>
-</ul>
+        {% if post.featured == true %}
 
-<h2>Projects</h2>
+            {% include featuredbox.html %}
 
-<ul>
-<li>FDTD Simulation</li>
-<li>Electric Field Simulation</li>
-<li>Gravitational Slingshot</li>
-</ul>
+        {% endif %}
 
-</body>
-</html>
+    {% endfor %}
+
+    </div>
+</section>
+
+{% endif %}
+
+<!-- Posts Index
+================================================== -->
+<section class="recent-posts">
+
+    <div class="section-title">
+
+        <h2><span>All Stories</span></h2>
+
+    </div>
+
+    <div class="row listrecent">
+
+        {% for post in paginator.posts %}
+
+        {% include postbox.html %}
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+<!-- Pagination
+================================================== -->
+<div class="bottompagination">
+<div class="pointerup"><i class="fa fa-caret-up"></i></div>
+<span class="navigation" role="navigation">
+    {% include pagination.html %}
+</span>
+</div>
+
