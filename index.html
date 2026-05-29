@@ -8,302 +8,94 @@
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg: #07070f;
-      --text: #eeeae2;
-      --muted: #9b97a0;
-      --accent: #d4845a;
-      --border: rgba(255,255,255,0.08);
-      --card-bg: rgba(255,255,255,0.04);
-      --glass: rgba(7,7,15,0.72);
-    }
-
+    :root { --bg: #07070f; --text: #eeeae2; --muted: #9b97a0; --accent: #d4845a; --border: rgba(255,255,255,0.08); --card-bg: rgba(255,255,255,0.04); --glass: rgba(7,7,15,0.72); }
     html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      line-height: 1.75;
-      font-size: 17px;
-      overflow-x: hidden;
-    }
-
-    /* ── STARFIELD ── */
-    #universe {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    /* nebula glow layers */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      background:
-        radial-gradient(ellipse 60% 50% at 15% 30%, rgba(90,40,140,0.18) 0%, transparent 70%),
-        radial-gradient(ellipse 50% 40% at 80% 70%, rgba(30,80,160,0.14) 0%, transparent 65%),
-        radial-gradient(ellipse 40% 55% at 60% 10%, rgba(180,60,80,0.10) 0%, transparent 65%);
-      pointer-events: none;
-    }
-
-    /* page content sits above canvas */
+    body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-weight: 300; line-height: 1.75; font-size: 17px; overflow-x: hidden; }
+    #universe { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+    body::before { content: ''; position: fixed; inset: 0; z-index: 0; background: radial-gradient(ellipse 60% 50% at 15% 30%, rgba(90,40,140,0.18) 0%, transparent 70%), radial-gradient(ellipse 50% 40% at 80% 70%, rgba(30,80,160,0.14) 0%, transparent 65%), radial-gradient(ellipse 40% 55% at 60% 10%, rgba(180,60,80,0.10) 0%, transparent 65%); pointer-events: none; }
     nav, header, section, footer { position: relative; z-index: 2; }
 
-    /* ── NAV ── */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(7,7,15,0.75);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.1rem 5vw;
-    }
-    .nav-name {
-      font-family: 'Lora', serif;
-      font-size: 1.05rem;
-      font-weight: 600;
-      letter-spacing: 0.01em;
-      color: var(--text);
-      text-decoration: none;
-    }
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(7,7,15,0.75); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; padding: 1.1rem 5vw; }
+    .nav-name { font-family: 'Lora', serif; font-size: 1.05rem; font-weight: 600; letter-spacing: 0.01em; color: var(--text); text-decoration: none; }
     .nav-links { display: flex; gap: 2.2rem; list-style: none; }
-    .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.88rem;
-      font-weight: 400;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.88rem; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.2s; }
     .nav-links a:hover { color: var(--accent); }
 
-   /* ── HERO ── */
-    header {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 8rem 5vw 6rem;
-      display: flex;
-      align-items: center;
-      gap: 3rem; /* Space between image and text */
-    }
-    .hero-img {
-      width: 180px;
-      height: 180px;
-      border-radius: 50%; /* Makes your picture a circle */
-      object-fit: cover;
-      border: 2px solid var(--border);
-      box-shadow: 0 0 20px rgba(212, 132, 90, 0.15); /* Subtle accent glow */
-      flex-shrink: 0;
-    }
-    .hero-content {
-      flex: 1;
-    }
-    .tag {
-      display: inline-block;
-      font-size: 0.75rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1.2rem;
-      font-weight: 500;
-    }
-    h1 {
-      font-family: 'Lora', serif;
-      font-size: clamp(2rem, 4vw, 3rem); /* Slightly adjusted to fit side-by-side nicely */
-      font-weight: 600;
-      line-height: 1.15;
-      margin-bottom: 1.5rem;
-      color: #f5f0e8;
-    }
+    header { max-width: 720px; margin: 0 auto; padding: 8rem 5vw 6rem; display: flex; align-items: center; gap: 3rem; }
+    .hero-img { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; border: 2px solid var(--border); box-shadow: 0 0 20px rgba(212,132,90,0.15); flex-shrink: 0; }
+    .hero-content { flex: 1; }
+    .tag { display: inline-block; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.2rem; font-weight: 500; }
+    h1 { font-family: 'Lora', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 600; line-height: 1.15; margin-bottom: 1.5rem; color: #f5f0e8; }
     h1 em { color: var(--accent); font-style: italic; }
-    .hero-sub {
-      font-size: 1.05rem;
-      color: var(--muted);
-      max-width: 540px;
-      line-height: 1.85;
-    }
+    .hero-sub { font-size: 1.05rem; color: var(--muted); max-width: 540px; line-height: 1.85; }
     .hero-sub strong { color: #d8d3cc; font-weight: 400; }
+    @media (max-width: 600px) { header { flex-direction: column; text-align: center; padding-top: 5rem; gap: 1.5rem; } .hero-sub { margin: 0 auto; } }
 
-    /* Responsive adjustment for small screens/phones */
-    @media (max-width: 600px) {
-      header {
-        flex-direction: column;
-        text-align: center;
-        padding-top: 5rem;
-        gap: 1.5rem;
-      }
-      .hero-sub { margin: 0 auto; }
-    }
+    .divider { width: 40px; height: 1px; background: var(--accent); margin: 2.8rem 0 0; opacity: 0.6; }
 
-    /* ── DIVIDER ── */
-    .divider {
-      width: 40px;
-      height: 1px;
-      background: var(--accent);
-      margin: 2.8rem 0 0;
-      opacity: 0.6;
-    }
+    section { max-width: 960px; margin: 0 auto; padding: 5rem 5vw; border-top: 1px solid var(--border); }
+    .section-label { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); font-weight: 500; margin-bottom: 2rem; }
+    h2 { font-family: 'Lora', serif; font-size: 2rem; font-weight: 600; margin-bottom: 1.6rem; line-height: 1.2; color: #f5f0e8; }
 
-    /* ── SECTIONS ── */
-    section {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 5rem 5vw;
-      border-top: 1px solid var(--border);
-    }
-    .section-label {
-      font-size: 0.72rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--accent);
-      font-weight: 500;
-      margin-bottom: 2rem;
-    }
-    h2 {
-      font-family: 'Lora', serif;
-      font-size: 2rem;
-      font-weight: 600;
-      margin-bottom: 1.6rem;
-      line-height: 1.2;
-      color: #f5f0e8;
-    }
+    .about-body p { color: var(--muted); margin-bottom: 1.1rem; font-size: 1rem; }
+    .about-body p strong { color: #d8d3cc; font-weight: 500; }
+    .pills { display: flex; flex-wrap: wrap; gap: 0.55rem; margin-top: 2rem; }
+    .pill { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 100px; padding: 0.28rem 1rem; font-size: 0.81rem; color: var(--muted); }
 
-    /* ── ABOUT ── */
-    .about-body p {
-      color: var(--muted);
-      margin-bottom: 1.1rem;
-      font-size: 1rem;
-    }
-    .about-body p strong {
-      color: #d8d3cc;
-      font-weight: 500;
-    }
-    .pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.55rem;
-      margin-top: 2rem;
-    }
-    .pill {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 100px;
-      padding: 0.28rem 1rem;
-      font-size: 0.81rem;
-      color: var(--muted);
-    }
-
-    /* ── BLOG CARDS ── */
-    .blogs-grid { display: flex; flex-direction: column; }
- .blog-card {
+    /* ── STAGGERED BLOG GRID ── */
+    .blogs-stagger {
       display: grid;
-      grid-template-columns: 1fr 100px auto; /* Text column, Image column, Arrow column */
-      align-items: center;
+      grid-template-columns: 1fr 1fr;
       gap: 1.5rem;
-      padding: 1.8rem 0;
-      border-bottom: 1px solid var(--border);
+      align-items: start;
+    }
+    .blogs-col { display: flex; flex-direction: column; gap: 1.5rem; }
+    /* Left col cards sit a bit lower for visual offset */
+    .blogs-col.left { padding-top: 2.8rem; }
+
+    .blog-card {
+      display: block;
       text-decoration: none;
       color: inherit;
-      transition: opacity 0.2s;
-    }
-    .blog-card:first-child { border-top: 1px solid var(--border); }
-    .blog-card:hover { opacity: 0.65; }
-
-    /* Style for your new article thumbnails */
-    .card-img {
-      width: 100px;
-      height: 70px;
-      object-fit: cover;
-      border-radius: 6px;
+      background: rgba(255,255,255,0.03);
       border: 1px solid var(--border);
-      background: var(--card-bg);
-    } 
-  
-    .card-topic {
-      font-size: 0.69rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 0.45rem;
-      font-weight: 500;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s, background 0.2s;
     }
-    .card-title {
-      font-family: 'Lora', serif;
-      font-size: 1.08rem;
-      font-weight: 600;
-      line-height: 1.4;
-      margin-bottom: 0.4rem;
-      color: #ede8df;
-    }
-    .card-desc {
-      font-size: 0.88rem;
-      color: var(--muted);
-      line-height: 1.65;
-    }
-    .card-arrow {
-      font-size: 1.1rem;
-      color: var(--muted);
-      padding-top: 0.15rem;
-      transition: transform 0.2s, color 0.2s;
-    }
-    .blog-card:hover .card-arrow { transform: translateX(5px); color: var(--accent); }
+    .blog-card:hover { border-color: rgba(212,132,90,0.35); background: rgba(255,255,255,0.055); transform: translateY(-3px); }
 
-    /* ── CONTACT ── */
-    .contact-row {
-      display: flex;
-      gap: 1.8rem;
-      flex-wrap: wrap;
-      margin-top: 0.5rem;
+    .card-thumb { width: 100%; height: 160px; object-fit: cover; display: block; filter: brightness(0.8); transition: filter 0.25s; }
+    .blog-card:hover .card-thumb { filter: brightness(0.95); }
+    /* Taller thumb for the very first (featured) card */
+    .blog-card.featured .card-thumb { height: 220px; }
+
+    .card-body { padding: 1.1rem 1.25rem 1.3rem; }
+    .card-topic { font-size: 0.67rem; letter-spacing: 0.11em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.45rem; font-weight: 500; }
+    .card-title { font-family: 'Lora', serif; font-size: 1.05rem; font-weight: 600; line-height: 1.38; margin-bottom: 0.5rem; color: #ede8df; }
+    .card-desc { font-size: 0.86rem; color: var(--muted); line-height: 1.65; }
+    .card-arrow { display: inline-block; margin-top: 0.75rem; font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); opacity: 0.7; transition: opacity 0.2s, transform 0.2s; }
+    .blog-card:hover .card-arrow { opacity: 1; transform: translateX(4px); }
+
+    @media (max-width: 600px) {
+      .blogs-stagger { grid-template-columns: 1fr; }
+      .blogs-col.left { padding-top: 0; }
     }
-    .contact-row a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.88rem;
-      display: flex;
-      align-items: center;
-      gap: 0.45rem;
-      transition: color 0.2s;
-    }
+
+    .contact-row { display: flex; gap: 1.8rem; flex-wrap: wrap; margin-top: 0.5rem; }
+    .contact-row a { color: var(--muted); text-decoration: none; font-size: 0.88rem; display: flex; align-items: center; gap: 0.45rem; transition: color 0.2s; }
     .contact-row a:hover { color: var(--accent); }
+    footer { text-align: center; padding: 3rem 5vw; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.82rem; }
 
-    /* ── FOOTER ── */
-    footer {
-      text-align: center;
-      padding: 3rem 5vw;
-      border-top: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 0.82rem;
-    }
-
-    /* ── FADE IN ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    header   { animation: fadeUp 0.8s ease both; }
-    section  { animation: fadeUp 0.8s ease both; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    header { animation: fadeUp 0.8s ease both; }
+    section { animation: fadeUp 0.8s ease both; }
     section:nth-of-type(1) { animation-delay: 0.12s; }
     section:nth-of-type(2) { animation-delay: 0.22s; }
     section:nth-of-type(3) { animation-delay: 0.32s; }
-
-    /* shooting stars are drawn on canvas now */
   </style>
 </head>
 <body>
-
-  <!-- Starfield canvas -->
   <canvas id="universe"></canvas>
 
   <nav>
@@ -317,274 +109,156 @@
 
   <header>
     <img class="hero-img" src="assets/images/profile.jpg" alt="Syed Noorulla">
-
     <div class="hero-content">
       <span class="tag">Physics · Writing · Research</span>
       <h1>Syed's <em>Cosmos</em></h1>
-      <p class="hero-sub">
-        I'm a physics undergraduate fascinated by <strong>time, entropy, and the deep structure of reality</strong> —
-        writing at the edge of physics and philosophy.
-      </p>
+      <p class="hero-sub">I'm a physics undergraduate fascinated by <strong>time, entropy, and the deep structure of reality</strong> — writing at the edge of physics and philosophy.</p>
       <div class="divider"></div>
     </div>
   </header>
 
-  <!-- ABOUT -->
   <section id="about">
     <p class="section-label">About</p>
     <h2>Who I am</h2>
     <div class="about-body">
-      <p>
-  I am an undergraduate in Physics at Alliance University, Bangalore, with interests at the intersection of philosophy of time, theoretical physics, foundational cosmology, and computational modelling. My academic trajectory is driven by an interest in the underlying mathematical structures of physical laws and the profound conceptual and philosophical inquiries that emerge from them. By exploring how formal frameworks map onto reality, I aim to probe the deeper mechanisms governing our universe.
-</p>
+      <p>I am an undergraduate in Physics at Alliance University, Bangalore, with interests at the intersection of philosophy of time, theoretical physics, foundational cosmology, and computational modelling. My academic trajectory is driven by an interest in the underlying mathematical structures of physical laws and the profound conceptual and philosophical inquiries that emerge from them.</p>
+      <p>My current independent research project, <em>Beyond Temporal Flow</em>, investigates the foundational nature of time through a rigorous synthesis of thermodynamics, special relativity, and the philosophy of physics. The core of this work involves a relativistic, two-system thought experiment designed to evaluate a relational framework of reality.</p>
+      <p>This theoretical focus is complemented by a strong commitment to the history, philosophy, and public communication of physics. Alongside my core research, I have authored over forty essays analysing topics ranging from quantum entanglement to cosmic horizons, and published a monograph examining the conceptual evolution of classical mechanics, relativity, and temporal philosophy.</p>
+      <p>Bridging theory and execution, my computational work centres on developing numerical simulations in Python to model complex dynamical systems. This includes the algorithmic tracking of gravitational slingshot mechanics as well as modelling electromagnetic wave propagation through Finite-Difference Time-Domain (FDTD) methods.</p>
+    </div>
+    <div class="pills">
+      <span class="pill">Electrodynamics</span>
+      <span class="pill">Philosophy of Time</span>
+      <span class="pill">Astrophysics</span>
+      <span class="pill">Special Relativity</span>
+      <span class="pill">Thermodynamics</span>
+      <span class="pill">Computational Physics</span>
+      <span class="pill">Science Writing</span>
+    </div>
+  </section>
 
-<p>
-  My current independent research project, <em>Beyond Temporal Flow</em>, investigates the foundational nature of time through a rigorous synthesis of thermodynamics, special relativity, and the philosophy of physics. The core of this work involves a relativistic, two-system thought experiment designed to evaluate a relational framework of reality. Specifically, I examine whether macroscopic temporal effects—traditionally ascribed to a fundamental, background time coordinate—can instead be formally derived as emergent consequences of state-space differences between interacting physical systems.
-</p>
+  <!-- BLOGS — staggered two-column grid -->
+  <section id="blogs">
+    <p class="section-label">Blogs</p>
+    <h2>Selected writing</h2>
 
-<p>
-  This theoretical focus is complemented by a strong commitment to the history, philosophy, and public communication of physics. Alongside my core research, I have authored over forty essays analysing topics ranging from quantum entanglement to cosmic horizons, and published a monograph examining the conceptual evolution of classical mechanics, relativity, and temporal philosophy. My academic experience is further enriched by active participation in foundational seminars and workshops at institutions such as the Indian Institute of Science (IISc) and the Max Planck Society.
-</p>
+    <div class="blogs-stagger">
+      <!-- RIGHT column: 4 cards -->
+      <div class="blogs-col right">
 
-<p>
-  Bridging theory and execution, my computational work centres on developing numerical simulations in Python to model complex dynamical systems. This includes the algorithmic tracking of gravitational slingshot mechanics as well as modelling electromagnetic wave propagation through Finite-Difference Time-Domain (FDTD) methods. Through these dual avenues of mathematical writing and numerical computation, I seek to clarify complex physical ideas while deepening my own foundational understanding of the cosmos.
-</p>
-      <div class="pills">
-        <span class="pill">Electrodynamics</span>
-        <span class="pill">Philosophy of Time</span>
-        <span class="pill">Astrophysics</span>
-        <span class="pill">Special Relativity</span>
-        <span class="pill">Thermodynamics</span>
-        <span class="pill">Computational Physics</span>
-        <span class="pill">Science Writing</span>
+        <a class="blog-card featured" href="article-1-einstein-entanglement.html">
+          <img class="card-thumb" src="assets/images/entanglement.jpg" alt="Einstein And Entanglement">
+          <div class="card-body">
+            <p class="card-topic">Quantum Mechanics · History of Physics</p>
+            <p class="card-title">Einstein And Entanglement</p>
+            <p class="card-desc">Einstein called it "spooky action at a distance" and spent decades trying to disprove it. The debate that changed quantum mechanics forever.</p>
+            <span class="card-arrow">Read →</span>
+          </div>
+        </a>
+
+        <a class="blog-card" href="article-3-boltzmann.html">
+          <img class="card-thumb" src="assets/images/boltzmann.jpg" alt="Ludwig Boltzmann">
+          <div class="card-body">
+            <p class="card-topic">Thermodynamics · History of Science</p>
+            <p class="card-title">Ludwig Boltzmann: The Genius of Disorder</p>
+            <p class="card-desc">The physicist who explained entropy, embraced randomness, and transformed our understanding of the universe.</p>
+            <span class="card-arrow">Read →</span>
+          </div>
+        </a>
+
+        <a class="blog-card" href="article-5-ai-in-science.html">
+          <img class="card-thumb" src="assets/images/Ai in science.jpg" alt="AI in Science">
+          <div class="card-body">
+            <p class="card-topic">Artificial Intelligence · Physics</p>
+            <p class="card-title">AI in Science: What Einstein Couldn't Predict</p>
+            <p class="card-desc">How neural networks and machine learning are shifting from tools to active scientific discovery partners.</p>
+            <span class="card-arrow">Read →</span>
+          </div>
+        </a>
+
+        <a class="blog-card" href="article-7-the-black-hole-war.html">
+          <img class="card-thumb" src="assets/images/the-black-hole-war.jpg" alt="The Black Hole War">
+          <div class="card-body">
+            <p class="card-topic">Cosmology · Quantum Gravity</p>
+            <p class="card-title">The Black Hole Information War</p>
+            <p class="card-desc">Hawking, Susskind, and the legendary intellectual battle over whether quantum information is destroyed inside an event horizon.</p>
+            <span class="card-arrow">Read →</span>
+          </div>
+        </a>
+
+      </div>
+
+      <!-- LEFT column: 3 cards, offset lower -->
+      <div class="blogs-col left">
+
+        <a class="blog-card" href="article-2-limits-of-the-universe.html">
+          <img class="card-thumb" src="assets/images/limits-of-the-universe.jpg" alt="Limits Of The Universe">
+          <div class="card-body">
+            <p class="card-topic">Cosmology · Special Relativity</p>
+            <p class="card-title">Limits Of The Universe</p>
+            <p class="card-desc">How far does the universe stretch? Exploring cosmic horizons, relativity, and the ultimate limits of what humanity can ever know.</p>
+            <span class="card-arrow">Read →</span>
+          </div>
+        </a>
+
+        <a class="blog-card" href="article-4-everyone-should-read-this-book.html">
+          <img class="card-thumb" src="assets/images/everyone-should-read-this-book.jpg" alt="Everyone Should Read This Book">
+          <div class="card-body">
+            <p class="card-topic">Book Review · Cosmology</p>
+            <p class="card-title">Everyone Should Read This Book</p>
+            <p class="card-desc">A Brief History of Time — no equations, no prerequisites, just the universe laid bare with quiet Hawking brilliance.</p>
+            <span class="card-arrow">Read →</span>
+          </div>
+        </a>
+
+        <a class="blog-card" href="article-6-knowing-vs-understanding.html">
+          <img class="card-thumb" src="assets/images/knowing-vs-understanding.jpg" alt="Knowing vs Understanding">
+          <div class="card-body">
+            <p class="card-topic">Epistemology · History of Science</p>
+            <p class="card-title">Knowing vs. Understanding</p>
+            <p class="card-desc">The critical divide between manipulating mathematical abstractions and truly grasping the physical realities they represent.</p>
+            <span class="card-arrow">Read →</span>
+          </div>
+        </a>
+
       </div>
     </div>
   </section>
 
-  <!-- BLOGS -->
-<section id="blogs">
-    <p class="section-label">Blogs</p>
-    <h2>Selected writing</h2>
-    <div class="blogs-grid">
-
-      <a class="blog-card" href="article-1-einstein-entanglement.html">
-        <div>
-          <p class="card-topic">Quantum Mechanics · History of Physics</p>
-          <p class="card-title">Einstein And Entanglement</p>
-          <p class="card-desc">Einstein called it "spooky action at a distance" and spent decades trying to disprove it. The debate that changed quantum mechanics forever.</p>
-        </div>
-        <img class="card-img" src="assets/images/entanglement.jpg" alt="Einstein And Entanglement">
-        <span class="card-arrow">→</span>
-      </a>
-
-      <a class="blog-card" href="article-2-limits-of-the-universe.html">
-        <div>
-          <p class="card-topic">Cosmology · Special Relativity</p>
-          <p class="card-title">Limits Of The Universe</p>
-          <p class="card-desc">How far does the universe stretch? Exploring cosmic horizons, relativity, and the ultimate limits of what humanity can ever know.</p>
-        </div>
-        <img class="card-img" src="assets/images/limits-of-the-universe.jpg" alt="Limits Of The Universe">
-        <span class="card-arrow">→</span>
-      </a>
-
-      <a class="blog-card" href="article-3-boltzmann.html">
-        <div>
-          <p class="card-topic">Thermodynamics · History of Science</p>
-          <p class="card-title">Ludwig Boltzmann: The Genius of Disorder</p>
-          <p class="card-desc">The physicist who explained entropy, embraced randomness, and transformed our understanding of the universe.</p>
-        </div>
-        <img class="card-img" src="assets/images/boltzmann.jpg" alt="Ludwig Boltzmann">
-        <span class="card-arrow">→</span>
-      </a>
-      
-      <a class="blog-card" href="article-4-everyone-should-read-this-book.html">
-        <div>
-          <p class="card-topic">Literature · Philosophy of Science</p>
-          <p class="card-title">Books That Shape the Physical Mind</p>
-          <p class="card-desc">An analysis of foundational texts that every physicist and philosopher should encounter to challenge their core assumptions.</p>
-        </div>
-        <img class="card-img" src="assets/images/everyone-should-read-this-book.jpg" alt="Book Analysis">
-        <span class="card-arrow">→</span>
-      </a>
-
-      <a class="blog-card" href="article-5-ai-in-science.html">
-        <div>
-          <p class="card-topic">Computational Physics · Philosophy of Mind</p>
-          <p class="card-title">Artificial Intelligence in Foundational Science</p>
-          <p class="card-desc">How neural networks and machine learning frameworks are shifting from simple analytical tools to active scientific discovery partners.</p>
-        </div>
-        <img class="card-img" src="assets/images/Ai in science.jpg" alt="AI in Science">
-        <span class="card-arrow">→</span>
-      </a>
-
-      <a class="blog-card" href="article-6-knowing-vs-understanding.html">
-        <div>
-          <p class="card-topic">Epistemology · History of Science</p>
-          <p class="card-title">Knowing vs. Understanding</p>
-          <p class="card-desc">Exploring the critical division between manipulating mathematical abstractions and truly understanding the physical realities they represent.</p>
-        </div>
-        <img class="card-img" src="assets/images/knowing-vs-understanding.jpg" alt="Knowing vs Understanding">
-        <span class="card-arrow">→</span>
-      </a>
-
-      <a class="blog-card" href="article-7-the-black-hole-war.html">
-        <div>
-          <p class="card-topic">Cosmology · Quantum Gravity</p>
-          <p class="card-title">The Black Hole Information War</p>
-          <p class="card-desc">Hawking, Susskind, and the legendary intellectual battle over whether quantum information is fundamentally destroyed inside an event horizon.</p>
-        </div>
-        <img class="card-img" src="assets/images/the-black-hole-war.jpg" alt="The Black Hole War">
-        <span class="card-arrow">→</span>
-      </a>
-      
-    </div>
-  </section>
-  <!-- CONTACT -->
   <section id="contact">
     <p class="section-label">Contact</p>
     <h2>Get in touch</h2>
-    <p style="color: var(--muted); margin-bottom: 1.8rem; font-size: 1rem;">
-      Whether it's physics, writing, or research collaboration — I'd love to hear from you.
-    </p>
+    <p style="color: var(--muted); margin-bottom: 1.8rem; font-size: 1rem;">Whether it's physics, writing, or research collaboration — I'd love to hear from you.</p>
     <div class="contact-row">
       <a href="mailto:syedzeeshan61652@gmail.com">✉ syedzeeshan61652@gmail.com</a>
       <a href="https://www.instagram.com/s.y.e.d_0/" target="_blank">📸 Instagram</a>
     </div>
   </section>
 
-  <footer>
-    © 2025 Syed Noorulla Sha Quadri · Built with curiosity.
-  </footer>
+  <footer>© 2025 Syed Noorulla Sha Quadri · Built with curiosity.</footer>
 
   <script>
-    // ── STARFIELD ──
     const canvas = document.getElementById('universe');
     const ctx = canvas.getContext('2d');
-
-    function resize() {
-      canvas.width  = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-    resize();
-    window.addEventListener('resize', () => { resize(); initStars(); });
-
+    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    resize(); window.addEventListener('resize', () => { resize(); initStars(); });
     let stars = [];
-
     function initStars() {
       stars = [];
       const count = Math.floor((canvas.width * canvas.height) / 3000);
       for (let i = 0; i < count; i++) {
         const r = Math.random();
-        stars.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          radius: r < 0.7 ? Math.random() * 0.6 + 0.2
-                : r < 0.92 ? Math.random() * 0.8 + 0.6
-                : Math.random() * 1.2 + 1.0,
-          alpha: Math.random() * 0.5 + 0.3,
-          twinkleSpeed: Math.random() * 0.008 + 0.002,
-          twinklePhase: Math.random() * Math.PI * 2,
-          hue: Math.random() < 0.15
-            ? (Math.random() < 0.5 ? 'rgba(180,200,255,' : 'rgba(255,220,180,')
-            : 'rgba(255,255,255,'
-        });
+        stars.push({ x: Math.random()*canvas.width, y: Math.random()*canvas.height, radius: r<0.7?Math.random()*0.6+0.2:r<0.92?Math.random()*0.8+0.6:Math.random()*1.2+1.0, alpha: Math.random()*0.5+0.3, twinkleSpeed: Math.random()*0.008+0.002, twinklePhase: Math.random()*Math.PI*2, hue: Math.random()<0.15?(Math.random()<0.5?'rgba(180,200,255,':'rgba(255,220,180,'):'rgba(255,255,255,' });
       }
     }
     initStars();
-
-    let t = 0;
-    // draw() is superseded by drawAll() below — defined here for reference only
-
-    // ── SHOOTING STARS (canvas-drawn star + tail) ──
-    const shooters = [];
-
-    function drawStar(cx, cy, r, alpha) {
-      const spikes = 4, inner = r * 0.45;
-      ctx.save();
-      ctx.translate(cx, cy);
-      ctx.rotate(Math.PI / 4); // 45° so it looks like ✦
-      ctx.beginPath();
-      for (let i = 0; i < spikes * 2; i++) {
-        const rad = i % 2 === 0 ? r : inner;
-        const angle = (i * Math.PI) / spikes;
-        i === 0 ? ctx.moveTo(Math.cos(angle) * rad, Math.sin(angle) * rad)
-                : ctx.lineTo(Math.cos(angle) * rad, Math.sin(angle) * rad);
-      }
-      ctx.closePath();
-      ctx.fillStyle = `rgba(255,255,240,${alpha})`;
-      ctx.shadowColor = 'rgba(220,210,255,0.9)';
-      ctx.shadowBlur = 8;
-      ctx.fill();
-      ctx.restore();
-    }
-
-    function spawnShooter() {
-      const angle = (Math.random() * 20 + 25) * Math.PI / 180; // 25–45° downward
-      const speed = Math.random() * 6 + 7;
-      shooters.push({
-        x: Math.random() * canvas.width * 0.75 + canvas.width * 0.05,
-        y: Math.random() * canvas.height * 0.45 + canvas.height * 0.05,
-        vx: Math.cos(angle) * speed,
-        vy: Math.sin(angle) * speed,
-        life: 1.0,
-        decay: Math.random() * 0.018 + 0.014,
-        trail: [],
-        radius: Math.random() * 2.5 + 2.5,
-      });
-    }
-
-    function drawAll() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      t += 0.016;
-
-      // background stars
-      stars.forEach(s => {
-        const a = s.alpha + Math.sin(t * s.twinkleSpeed * 60 + s.twinklePhase) * 0.15;
-        ctx.beginPath();
-        ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
-        ctx.fillStyle = s.hue + Math.max(0.05, a) + ')';
-        ctx.fill();
-      });
-
-      // shooting stars
-      for (let i = shooters.length - 1; i >= 0; i--) {
-        const s = shooters[i];
-        s.trail.push({ x: s.x, y: s.y, life: s.life });
-        if (s.trail.length > 28) s.trail.shift();
-
-        // tail
-        for (let j = 1; j < s.trail.length; j++) {
-          const p0 = s.trail[j - 1], p1 = s.trail[j];
-          const frac = j / s.trail.length;
-          ctx.beginPath();
-          ctx.moveTo(p0.x, p0.y);
-          ctx.lineTo(p1.x, p1.y);
-          ctx.strokeStyle = `rgba(220,215,255,${frac * s.life * 0.55})`;
-          ctx.lineWidth = frac * s.radius * 0.55;
-          ctx.lineCap = 'round';
-          ctx.shadowBlur = 0;
-          ctx.stroke();
-        }
-
-        // star head
-        drawStar(s.x, s.y, s.radius * (0.7 + 0.3 * s.life), s.life * 0.95);
-
-        s.x += s.vx;
-        s.y += s.vy;
-        s.life -= s.decay;
-        if (s.life <= 0) shooters.splice(i, 1);
-      }
-
-      requestAnimationFrame(drawAll);
-    }
-    drawAll(); // replaces the earlier draw() call
-
-    function scheduleShooter() {
-      spawnShooter();
-      setTimeout(scheduleShooter, Math.random() * 5000 + 3000);
-    }
-    setTimeout(scheduleShooter, 1500);
+    const shooters = []; let t = 0;
+    function drawStar(cx,cy,r,alpha){const spikes=4,inner=r*0.45;ctx.save();ctx.translate(cx,cy);ctx.rotate(Math.PI/4);ctx.beginPath();for(let i=0;i<spikes*2;i++){const rad=i%2===0?r:inner,angle=(i*Math.PI)/spikes;i===0?ctx.moveTo(Math.cos(angle)*rad,Math.sin(angle)*rad):ctx.lineTo(Math.cos(angle)*rad,Math.sin(angle)*rad);}ctx.closePath();ctx.fillStyle=`rgba(255,255,240,${alpha})`;ctx.shadowColor='rgba(220,210,255,0.9)';ctx.shadowBlur=8;ctx.fill();ctx.restore();}
+    function spawnShooter(){const angle=(Math.random()*20+25)*Math.PI/180,speed=Math.random()*6+7;shooters.push({x:Math.random()*canvas.width*0.75+canvas.width*0.05,y:Math.random()*canvas.height*0.45+canvas.height*0.05,vx:Math.cos(angle)*speed,vy:Math.sin(angle)*speed,life:1.0,decay:Math.random()*0.018+0.014,trail:[],radius:Math.random()*2.5+2.5});}
+    function drawAll(){ctx.clearRect(0,0,canvas.width,canvas.height);t+=0.016;stars.forEach(s=>{const a=s.alpha+Math.sin(t*s.twinkleSpeed*60+s.twinklePhase)*0.15;ctx.beginPath();ctx.arc(s.x,s.y,s.radius,0,Math.PI*2);ctx.fillStyle=s.hue+Math.max(0.05,a)+')';ctx.fill();});for(let i=shooters.length-1;i>=0;i--){const s=shooters[i];s.trail.push({x:s.x,y:s.y,life:s.life});if(s.trail.length>28)s.trail.shift();for(let j=1;j<s.trail.length;j++){const p0=s.trail[j-1],p1=s.trail[j],frac=j/s.trail.length;ctx.beginPath();ctx.moveTo(p0.x,p0.y);ctx.lineTo(p1.x,p1.y);ctx.strokeStyle=`rgba(220,215,255,${frac*s.life*0.55})`;ctx.lineWidth=frac*s.radius*0.55;ctx.lineCap='round';ctx.shadowBlur=0;ctx.stroke();}drawStar(s.x,s.y,s.radius*(0.7+0.3*s.life),s.life*0.95);s.x+=s.vx;s.y+=s.vy;s.life-=s.decay;if(s.life<=0)shooters.splice(i,1);}requestAnimationFrame(drawAll);}
+    drawAll();
+    function scheduleShooter(){spawnShooter();setTimeout(scheduleShooter,Math.random()*5000+3000);}
+    setTimeout(scheduleShooter,1500);
   </script>
-
 </body>
 </html>
