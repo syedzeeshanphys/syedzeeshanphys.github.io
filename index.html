@@ -266,7 +266,253 @@
 </head>
 <body>
 
+  <!-- Starfield canvas -->
   <canvas id="universe"></canvas>
 
   <nav>
     <a class="nav-name" href="#">Syed Noorulla</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#blogs">Blogs</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header>
+    <span class="tag">Physics · Writing · Research</span>
+    <h1>Thinking out loud<br>about the <em>universe.</em></h1>
+    <p class="hero-sub">
+      I'm a physics undergraduate fascinated by <strong>time, entropy, and the deep structure of reality</strong> —
+      writing at the edge of science and philosophy.
+    </p>
+    <div class="divider"></div>
+  </header>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <p class="section-label">About</p>
+    <h2>Who I am</h2>
+    <div class="about-body">
+      <p>
+        I'm <strong>Syed Noorulla Sha Quadri</strong>, a BSc Physics student at Alliance University, Bangalore (CGPA 8.3),
+        working through electrodynamics, astrophysics, and the mathematics that ties them together.
+      </p>
+      <p>
+        My ongoing research, <strong>Beyond Temporal Flow</strong>, reinterprets time as a relative state function —
+        weaving together thermodynamics, special relativity, and philosophy of time. I designed a relativistic
+        two-system thought experiment to show that time dilation might emerge from differences in physical
+        states rather than absolute temporal intervals.
+      </p>
+      <p>
+        Outside research I've written 40+ articles on Medium, tutored high-school students in physics and maths,
+        and published a 40-page book on classical mechanics, relativity, and the philosophy of time on Amazon Kindle.
+        I've attended seminars at IISc, MPS Germany, and workshops on Einstein's theories and soft matter physics.
+      </p>
+      <p>
+        I'm also building computational physics projects in Python — simulating gravitational slingshots and
+        electromagnetic wave propagation via the FDTD method.
+      </p>
+      <div class="pills">
+        <span class="pill">Electrodynamics</span>
+        <span class="pill">Philosophy of Time</span>
+        <span class="pill">Astrophysics</span>
+        <span class="pill">Special Relativity</span>
+        <span class="pill">Thermodynamics</span>
+        <span class="pill">Computational Physics</span>
+        <span class="pill">Science Writing</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOGS -->
+  <section id="blogs">
+    <p class="section-label">Blogs</p>
+    <h2>Selected writing</h2>
+    <div class="blogs-grid">
+
+     <a class="blog-card" href="article-1-einstein-entanglement.html">
+  <div>
+    <p class="card-topic">Quantum Mechanics · History of Physics</p>
+    <p class="card-title">Einstein And Entanglement</p>
+    <p class="card-desc">
+      Einstein called it "spooky action at a distance" and spent decades trying to disprove it. The debate that changed quantum mechanics forever.
+    </p>
+  </div>
+  <span class="card-arrow">→</span>
+</a>
+
+<a class="blog-card" href="article-2-limits-of-the-universe.html">
+  <div>
+    <p class="card-topic">Cosmology · Special Relativity</p>
+    <p class="card-title">Limits Of The Universe</p>
+    <p class="card-desc">
+      How far does the universe stretch? Exploring cosmic horizons, relativity, and the ultimate limits of what humanity can ever know.
+    </p>
+  </div>
+  <span class="card-arrow">→</span>
+</a>
+
+<a class="blog-card" href="article-3-boltzmann.html">
+  <div>
+    <p class="card-topic">Thermodynamics · History of Science</p>
+    <p class="card-title">Ludwig Boltzmann: The Genius of Disorder</p>
+    <p class="card-desc">
+      The physicist who explained entropy, embraced randomness, and transformed our understanding of the universe.
+    </p>
+  </div>
+  <span class="card-arrow">→</span>
+</a>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="section-label">Contact</p>
+    <h2>Get in touch</h2>
+    <p style="color: var(--muted); margin-bottom: 1.8rem; font-size: 1rem;">
+      Whether it's physics, writing, or research collaboration — I'd love to hear from you.
+    </p>
+    <div class="contact-row">
+      <a href="mailto:nsyedBSC24@sci.alliance.edu.in">✉ nsyedBSC24@sci.alliance.edu.in</a>
+      <a href="https://medium.com/@nsyedBSC24" target="_blank">✍ Medium</a>
+      <a href="https://github.com/" target="_blank">⌥ GitHub</a>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 Syed Noorulla Sha Quadri · Built with curiosity.
+  </footer>
+
+  <script>
+    // ── STARFIELD ──
+    const canvas = document.getElementById('universe');
+    const ctx = canvas.getContext('2d');
+
+    function resize() {
+      canvas.width  = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', () => { resize(); initStars(); });
+
+    let stars = [];
+
+    function initStars() {
+      stars = [];
+      const count = Math.floor((canvas.width * canvas.height) / 3000);
+      for (let i = 0; i < count; i++) {
+        const r = Math.random();
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          radius: r < 0.7 ? Math.random() * 0.6 + 0.2
+                : r < 0.92 ? Math.random() * 0.8 + 0.6
+                : Math.random() * 1.2 + 1.0,
+          alpha: Math.random() * 0.5 + 0.3,
+          twinkleSpeed: Math.random() * 0.008 + 0.002,
+          twinklePhase: Math.random() * Math.PI * 2,
+          hue: Math.random() < 0.15
+            ? (Math.random() < 0.5 ? 'rgba(180,200,255,' : 'rgba(255,220,180,')
+            : 'rgba(255,255,255,'
+        });
+      }
+    }
+    initStars();
+
+    let t = 0;
+    // draw() is superseded by drawAll() below — defined here for reference only
+
+    // ── SHOOTING STARS (canvas-drawn star + tail) ──
+    const shooters = [];
+
+    function drawStar(cx, cy, r, alpha) {
+      const spikes = 4, inner = r * 0.45;
+      ctx.save();
+      ctx.translate(cx, cy);
+      ctx.rotate(Math.PI / 4); // 45° so it looks like ✦
+      ctx.beginPath();
+      for (let i = 0; i < spikes * 2; i++) {
+        const rad = i % 2 === 0 ? r : inner;
+        const angle = (i * Math.PI) / spikes;
+        i === 0 ? ctx.moveTo(Math.cos(angle) * rad, Math.sin(angle) * rad)
+                : ctx.lineTo(Math.cos(angle) * rad, Math.sin(angle) * rad);
+      }
+      ctx.closePath();
+      ctx.fillStyle = `rgba(255,255,240,${alpha})`;
+      ctx.shadowColor = 'rgba(220,210,255,0.9)';
+      ctx.shadowBlur = 8;
+      ctx.fill();
+      ctx.restore();
+    }
+
+    function spawnShooter() {
+      const angle = (Math.random() * 20 + 25) * Math.PI / 180; // 25–45° downward
+      const speed = Math.random() * 6 + 7;
+      shooters.push({
+        x: Math.random() * canvas.width * 0.75 + canvas.width * 0.05,
+        y: Math.random() * canvas.height * 0.45 + canvas.height * 0.05,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        life: 1.0,
+        decay: Math.random() * 0.018 + 0.014,
+        trail: [],
+        radius: Math.random() * 2.5 + 2.5,
+      });
+    }
+
+    function drawAll() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      t += 0.016;
+
+      // background stars
+      stars.forEach(s => {
+        const a = s.alpha + Math.sin(t * s.twinkleSpeed * 60 + s.twinklePhase) * 0.15;
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+        ctx.fillStyle = s.hue + Math.max(0.05, a) + ')';
+        ctx.fill();
+      });
+
+      // shooting stars
+      for (let i = shooters.length - 1; i >= 0; i--) {
+        const s = shooters[i];
+        s.trail.push({ x: s.x, y: s.y, life: s.life });
+        if (s.trail.length > 28) s.trail.shift();
+
+        // tail
+        for (let j = 1; j < s.trail.length; j++) {
+          const p0 = s.trail[j - 1], p1 = s.trail[j];
+          const frac = j / s.trail.length;
+          ctx.beginPath();
+          ctx.moveTo(p0.x, p0.y);
+          ctx.lineTo(p1.x, p1.y);
+          ctx.strokeStyle = `rgba(220,215,255,${frac * s.life * 0.55})`;
+          ctx.lineWidth = frac * s.radius * 0.55;
+          ctx.lineCap = 'round';
+          ctx.shadowBlur = 0;
+          ctx.stroke();
+        }
+
+        // star head
+        drawStar(s.x, s.y, s.radius * (0.7 + 0.3 * s.life), s.life * 0.95);
+
+        s.x += s.vx;
+        s.y += s.vy;
+        s.life -= s.decay;
+        if (s.life <= 0) shooters.splice(i, 1);
+      }
+
+      requestAnimationFrame(drawAll);
+    }
+    drawAll(); // replaces the earlier draw() call
+
+    function scheduleShooter() {
+      spawnShooter();
+      setTimeout(scheduleShooter, Math.random() * 5000 + 3000);
+    }
+    setTimeout(scheduleShooter, 1500);
+  </script>
+
+</body>
+</html>
