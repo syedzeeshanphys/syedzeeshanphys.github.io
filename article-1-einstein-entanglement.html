@@ -334,7 +334,12 @@
       <p>He was convinced it was the former. There must be <em>hidden variables</em> — deeper layers of reality that quantum mechanics had not yet uncovered — that determined outcomes in advance, locally, without any ghostly long-distance influence.</p>
 
       <h2>Bohr's Reply</h2>
-
+      
+<figure class="article-figure">
+  <img src="assets/images/entanglement.jpg" alt="Quantum Entanglement Concept Mapping">
+  <figcaption>Fig 1.1: A conceptual mapping of non-local correlations in state-space transitions.</figcaption>
+</figure>
+      
       <p>The response came from Niels Bohr, Einstein's great intellectual sparring partner, the architect of the Copenhagen interpretation of quantum mechanics. Bohr's reply, published the same year, was characteristically dense — so much so that many physicists found it almost impenetrable.</p>
 
       <p>But Bohr's core point was clear: Einstein's framework of "elements of reality" was itself flawed. In quantum mechanics, properties do not exist independently of measurement. There is no deeper hidden reality waiting to be uncovered — the act of observation is itself part of what constitutes physical reality. To demand that particles have definite properties before measurement is to import classical assumptions into a domain where they do not belong.</p>
@@ -383,6 +388,8 @@
     <a class="back-link" href="index.html#blogs">← Back to Writing</a>
     <p>© 2025 Syed Noorulla Sha Quadri · Built with curiosity.</p>
   </footer>
+  
+  <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
 
   <script>
     const canvas = document.getElementById('universe');
@@ -421,6 +428,13 @@
       requestAnimationFrame(draw);
     }
     draw();
+
+    // Bind Medium Zoom animation to your figure elements
+    mediumZoom('.article-figure img', {
+      background: 'rgba(7, 7, 15, 0.95)', /* Matches your custom space background color */
+      margin: 40
+    });
   </script>
+  
 </body>
 </html>
